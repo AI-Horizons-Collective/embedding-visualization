@@ -20,6 +20,10 @@ export const menusAtom = atom<MenuItem[]>([
     key: MenuEnum.Scatter3D,
     label: '3D 散点图',
   },
+  {
+    key: MenuEnum.Distance,
+    label: '距离计算',
+  },
 ]);
 
 export const activeMenuAtom = atomWithStorage<MenuEnum>(

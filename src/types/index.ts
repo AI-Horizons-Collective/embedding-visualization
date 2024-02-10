@@ -3,6 +3,7 @@ export enum MenuEnum {
   FullDimensionalHeatMap = 'FullDimensionalHeatMap',
   Scatter2D = 'Scatter2D',
   Scatter3D = 'Scatter3D',
+  Distance = 'Distance',
 }
 
 export type MenuItem = {

@@ -9,6 +9,7 @@ import { MenuEnum } from '../types';
 import { FullDimensionalHeatMap } from '../features/full-dimensional-heat-map';
 import { Scatter2d } from '../features/scatter-2d';
 import { Scatter3d } from '../features/scatter-3d';
+import { Distance } from '../features/distance';
 
 const classes = {
   layout: css`
@@ -41,6 +42,8 @@ export const DefaultLayout: FC = () => {
           ))
           .with(MenuEnum.Scatter2D, () => <Scatter2d />)
           .with(MenuEnum.Scatter3D, () => <Scatter3d />)
+          .with(MenuEnum.Distance, () => <Distance />)
+
           .otherwise(() => (
             <div>404</div>
           ))}
