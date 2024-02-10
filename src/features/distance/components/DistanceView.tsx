@@ -37,10 +37,11 @@ export const DistanceView: FC<{
         <Typography.Text>{title}</Typography.Text>
       </div>
       <div className={classes.content}>
-        {data.map(({ name, value }) => {
+        {data.map(({ name, value }, index) => {
           return (
             <div key={name + value} className={classes.item}>
               <div>
+                <Typography.Text type="success">{index}. </Typography.Text>
                 <Typography.Text>{name}</Typography.Text>
               </div>
               <div style={{ textAlign: 'right' }}>{value}</div>

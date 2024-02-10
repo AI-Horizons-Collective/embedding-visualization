@@ -1,6 +1,6 @@
 import { FC, useMemo, useState } from 'react';
 import { css } from '@emotion/css';
-import { Col, Form, InputNumber, Row, Tag, Typography } from 'antd';
+import { Col, InputNumber, Row, Tag, Typography } from 'antd';
 import { useAtom } from 'jotai';
 import {
   embeddingsAtom,
@@ -48,11 +48,11 @@ export const Distance: FC = () => {
   const embeddings = useMemo(() => {
     const pca = new PCA(_embeddings);
     return pca.predict(_embeddings, { nComponents: dimensions }).toJSON();
-  }, [_embeddings]);
+  }, [_embeddings, dimensions]);
   const searchEmbeddings = useMemo(() => {
     const pca = new PCA(_embeddings);
     return pca.predict(_searchEmbeddings, { nComponents: dimensions }).toJSON();
-  }, [_searchEmbeddings]);
+  }, [_searchEmbeddings, dimensions]);
   const searchEmbedding = searchEmbeddings[0];
   const searchEmbeddingText = searchEmbeddingTexts[0];
   const euclideanDistances: { name: string; value: number }[] = useMemo(() => {
@@ -62,7 +62,7 @@ export const Distance: FC = () => {
         value: euclideanDistance(embedding, searchEmbedding),
       };
     });
-  }, [embeddings, searchEmbedding]);
+  }, [embeddings, searchEmbedding, dimensions]);
   const cosineSimilarities: { name: string; value: number }[] = useMemo(() => {
     return embeddings.map((embedding, index) => {
       return {
@@ -70,7 +70,7 @@ export const Distance: FC = () => {
         value: cosineSimilarity(embedding, searchEmbedding),
       };
     });
-  }, [embeddings, searchEmbedding]);
+  }, [embeddings, searchEmbedding, dimensions]);
   const dotProductSimilarities: { name: string; value: number }[] =
     useMemo(() => {
       return embeddings.map((embedding, index) => {
@@ -79,7 +79,7 @@ export const Distance: FC = () => {
           value: dotProductSimilarity(embedding, searchEmbedding),
         };
       });
-    }, [embeddings, searchEmbedding]);
+    }, [embeddings, searchEmbedding, dimensions]);
   return (
     <div className={classes.wrapper}>
       <div className={classes.header}>
@@ -87,19 +87,18 @@ export const Distance: FC = () => {
           <Typography.Text type="success">当前搜索词为:</Typography.Text>
           <Tag color={'orange'}>{searchEmbeddingText}</Tag>
         </div>
-        <Form size={'small'}>
-          <Form.Item label="维度">
-            <InputNumber
-              step={1}
-              min={MIN_DIMENSIONS}
-              max={MAX_DIMENSIONS}
-              value={dimensions}
-              onChange={(value) => {
-                setDimensions(value || DEFAULT_DIMENSIONS);
-              }}
-            />
-          </Form.Item>
-        </Form>
+        <InputNumber
+          style={{ minWidth: '260px' }}
+          prefix={<Typography.Text type="success">维度:</Typography.Text>}
+          size={'small'}
+          step={1}
+          min={MIN_DIMENSIONS}
+          max={MAX_DIMENSIONS}
+          value={dimensions}
+          onChange={(value) => {
+            setDimensions(value || DEFAULT_DIMENSIONS);
+          }}
+        />
       </div>
       <Row className={classes.content}>
         <Col className={classes.contentCol} span={8}>
