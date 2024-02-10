@@ -12,6 +12,14 @@ export const menusAtom = atom<MenuItem[]>([
     key: MenuEnum.FullDimensionalHeatMap,
     label: '全维度热力图',
   },
+  {
+    key: MenuEnum.Scatter2D,
+    label: '2D 散点图',
+  },
+  {
+    key: MenuEnum.Scatter3D,
+    label: '3D 散点图',
+  },
 ]);
 
 export const activeMenuAtom = atomWithStorage<MenuEnum>(
@@ -30,6 +38,6 @@ export const searchEmbeddingsAtom = atomWithStorage<number[][]>(
   [],
 );
 export const searchEmbeddingTextsAtom = atomWithStorage<string[]>(
-  'searchEmbeddingsAtom',
+  'searchEmbeddingTextsAtom',
   [],
 );

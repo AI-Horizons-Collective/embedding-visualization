@@ -49,9 +49,9 @@ export const FullDimensionalHeatMap: FC = () => {
       )
       .run();
   }, [_embeddings, dimensional]);
-  const flotEmbeddings = embeddings.flat();
-  const max = Math.max(...flotEmbeddings);
-  const min = Math.min(...flotEmbeddings);
+  const flatEmbeddings = embeddings.flat();
+  const max = Math.max(...flatEmbeddings);
+  const min = Math.min(...flatEmbeddings);
   const options = useMemo(() => {
     return {
       tooltip: {
@@ -78,6 +78,9 @@ export const FullDimensionalHeatMap: FC = () => {
       yAxis: {
         type: 'category',
         data: embeddingTexts,
+        axisLabel: {
+          fontSize: 8, // 设置 y 轴标签字体大小为 14
+        },
         splitArea: {
           show: true,
         },
