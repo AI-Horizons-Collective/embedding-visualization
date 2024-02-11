@@ -104,13 +104,13 @@ export const Distance: FC = () => {
         <Col className={classes.contentCol} span={8}>
           <DistanceView
             title="欧几里得距离"
-            data={euclideanDistances.sort((a, b) => a.value - b.value)}
+            data={euclideanDistances.sort((a, b) => b.value - a.value)}
           />
         </Col>
         <Col className={classes.contentCol} span={8}>
           <DistanceView
             title="余弦相似度"
-            data={cosineSimilarities.sort((a, b) => b.value - a.value)}
+            data={cosineSimilarities.sort((a, b) => a.value - b.value)}
           />
         </Col>
         <Col className={classes.contentCol} span={8}>
