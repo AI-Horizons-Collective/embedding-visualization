@@ -116,7 +116,7 @@ export const Distance: FC = () => {
         <Col className={classes.contentCol} span={8}>
           <DistanceView
             title="点积相似度"
-            data={dotProductSimilarities.sort((a, b) => b.value - a.value)}
+            data={dotProductSimilarities.sort((a, b) => a.value - b.value)}
           />
         </Col>
       </Row>
