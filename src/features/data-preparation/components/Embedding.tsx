@@ -87,7 +87,7 @@ export const Embedding: FC<{
       </Form>
       <Divider />
       <div className={classes.view}>
-        <ReactJSONView src={embeddings} name={null} />
+        <ReactJSONView src={embeddings} name={null} displayDataTypes={false} />
       </div>
     </div>
   );

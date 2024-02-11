@@ -156,7 +156,7 @@ export const FullDimensionalHeatMap: FC = () => {
               <Radio value={DimensionalTypeEnum.All}>全维度</Radio>
               <Radio value={DimensionalTypeEnum.One}>一维</Radio>
               <Radio value={DimensionalTypeEnum.Two}>二维</Radio>
-              <Radio value={DimensionalTypeEnum.Three}>三维维</Radio>
+              <Radio value={DimensionalTypeEnum.Three}>三维</Radio>
             </Radio.Group>
           </Form.Item>
         </Form>
