@@ -38,6 +38,8 @@ const classes = {
 const DEFAULT_DIMENSIONS = 3;
 const MAX_DIMENSIONS = 50;
 const MIN_DIMENSIONS = 2;
+const OPEN_AI_DIMENSIONS = 1536;
+
 export const Distance: FC = () => {
   const [_embeddings] = useAtom(embeddingsAtom);
   const [embeddingTexts] = useAtom(embeddingTextsAtom);
@@ -46,10 +48,16 @@ export const Distance: FC = () => {
   const [searchEmbeddingTexts] = useAtom(searchEmbeddingTextsAtom);
   const [dimensions, setDimensions] = useState(DEFAULT_DIMENSIONS);
   const embeddings = useMemo(() => {
+    if (dimensions > MAX_DIMENSIONS) {
+      return _embeddings;
+    }
     const pca = new PCA(_embeddings);
     return pca.predict(_embeddings, { nComponents: dimensions }).toJSON();
   }, [_embeddings, dimensions]);
   const searchEmbeddings = useMemo(() => {
+    if (dimensions > MAX_DIMENSIONS) {
+      return _searchEmbeddings;
+    }
     const pca = new PCA(_embeddings);
     return pca.predict(_searchEmbeddings, { nComponents: dimensions }).toJSON();
   }, [_searchEmbeddings, dimensions]);
@@ -89,14 +97,15 @@ export const Distance: FC = () => {
         </div>
         <InputNumber
           style={{ minWidth: '260px' }}
-          prefix={<Typography.Text type="success">维度:</Typography.Text>}
+          addonBefore={<Typography.Text type="success">维度:</Typography.Text>}
           size={'small'}
           step={1}
           min={MIN_DIMENSIONS}
-          max={MAX_DIMENSIONS}
+          // max={MAX_DIMENSIONS}
           value={dimensions}
-          onChange={(value) => {
-            setDimensions(value || DEFAULT_DIMENSIONS);
+          onChange={(_value) => {
+            const value = _value || DEFAULT_DIMENSIONS;
+            setDimensions(value > MAX_DIMENSIONS ? OPEN_AI_DIMENSIONS : value);
           }}
         />
       </div>
